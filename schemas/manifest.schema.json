@@ -1,0 +1,28 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"VME Dataset Manifest",
+  "type":"object",
+  "required":["dataset_id","image_id","source_sha256","schema_version","instances","mask_refs","policy_ref","created_at"],
+  "properties":{
+    "dataset_id":{"type":"string","minLength":1},
+    "image_id":{"type":"string","minLength":1},
+    "source_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "schema_version":{"type":"string","minLength":1},
+    "instances":{
+      "type":"array",
+      "items":{
+        "type":"object",
+        "required":["instance_id","class","provenance","visibility"],
+        "properties":{
+          "instance_id":{"type":"string","minLength":1},
+          "class":{"type":"string","minLength":1},
+          "provenance":{"enum":["OBSERVED","DERIVED","INFERRED","RECONSTRUCTED","UNKNOWN"]},
+          "visibility":{"enum":["VISIBLE","OCCLUDED","UNKNOWN"]}
+        }
+      }
+    },
+    "mask_refs":{"type":"object","additionalProperties":{"type":"string","pattern":"^[a-f0-9]{64}$"}},
+    "policy_ref":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "created_at":{"type":"string","format":"date-time"}
+  }
+}
