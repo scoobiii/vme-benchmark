@@ -1,0 +1,16 @@
+name: VME Benchmark
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  schema-and-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JSON schema syntax
+        run: python -c "import json; json.load(open('schemas/evidence.schema.json')); print('schema: OK')"
+      - name: Verify repository policy specification
+        run: test -s docs/MASK_SPEC.md && test -s docs/ARCHITECTURE.md
