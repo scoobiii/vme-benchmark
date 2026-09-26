@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"VME Execution Evidence",
+  "type":"object",
+  "required":["source_sha256","mask_sha256","policy_sha256","config_sha256","decision","changed_pixels","protected_pixels_changed"],
+  "properties":{
+    "source_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "mask_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "policy_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "config_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "decision":{"enum":["PASS","FAIL","BLOCKED"]},
+    "changed_pixels":{"type":"integer","minimum":0},
+    "protected_pixels_changed":{"type":"integer","minimum":0},
+    "reconstructed_pixels":{"type":"integer","minimum":0},
+    "provenance":{"enum":["OBSERVED","DERIVED","INFERRED","RECONSTRUCTED","UNKNOWN"]}
+  }
+}
